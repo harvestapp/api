@@ -1,0 +1,36 @@
+version: '2'
+volumes:
+  bedrock-datavolume:
+    driver: local
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+services:
+  regolith:
+    container_name: regolith
+    build:
+      context: .
+      dockerfile: ./regolithDockerFile
+    tty: true
+    networks:
+      - frontend
+      - backend
+    ports:
+      - "80:80"
+    links:
+      - bedrock
+    volumes:
+      - ./:/api
+  bedrock:
+    container_name: bedrock
+    image: harvestapp/images:bedrock
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - bedrock-datavolume:/var/lib/mysql
+    networks:
+      - backend
+    ports:
+      - "3306:3306"

@@ -1,0 +1,4 @@
+FROM harvestapp/images:regolith
+RUN chmod +x init_api.sh
+CMD ["service", "php7.0-fpm", "start"]
+CMD ["nginx", "-g", "daemon off;"]
