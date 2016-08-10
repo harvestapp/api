@@ -11,10 +11,14 @@
 |
 */
 
-$app->get('/', function () use ($app) {
-    return $app->version();
+$app->get('/', function () {
+  return view('splash');
 });
 
-$app->get('/info', function () {
-    return phpinfo();
+$app->get('version', function () use ($app) {
+  return $app->version();
+});
+
+$app->get('info', function () {
+  return phpinfo();
 });
