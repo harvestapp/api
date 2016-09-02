@@ -22,3 +22,10 @@ $app->get('version', function () use ($app) {
 $app->get('info', function () {
   return phpinfo();
 });
+
+$app->get('users', function () {
+  $users = DB::table('users')->get();
+  return $users;
+});
+
+$app->post('user', 'App\Http\Controllers\UserController@create');
