@@ -28,4 +28,4 @@ $app->get('users', function () {
   return $users;
 });
 
-$app->post('user', 'App\Http\Controllers\UserController@create');
+$app->get('user', 'UserController@test');
